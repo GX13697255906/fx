@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: multiple-datasources
+  datasource:
+    fm:
+      jdbc-url: jdbc:mysql://139.199.84.234:3306/fm?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root1
+      password: root1
+    taobao:
+      jdbc-url: jdbc:mysql://139.199.84.234:3306/taobao?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root1
+      password: root1
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis-plus:
+  typeAliasesPackage: com.gx.fm.entity
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
