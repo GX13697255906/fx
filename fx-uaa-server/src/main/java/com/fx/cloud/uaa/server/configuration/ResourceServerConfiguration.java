@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.logout.CookieClearingLogo
 @Slf4j
 @Configuration
 @EnableResourceServer
-@Order(3)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
 
