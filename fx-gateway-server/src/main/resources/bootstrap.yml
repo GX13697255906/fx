@@ -1,0 +1,60 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: ${artifactId}
+  cloud:
+    nacos:
+      config:
+        namespace: ${config.namespace}
+        server-addr: ${config.server-addr}
+        shared-configs[0]:
+          data-id: common.properties  # 配置文件名-Data Id
+          group: DEFAULT_GROUP        # 默认为DEFAULT_GROUP
+          refresh: true               # 是否动态刷新，默认为false
+        shared-configs[1]:
+          data-id: db.properties  # 配置文件名-Data Id
+          group: DEFAULT_GROUP        # 默认为DEFAULT_GROUP
+          refresh: true               # 是否动态刷新，默认为false
+        shared-configs[2]:
+          data-id: redis.properties  # 配置文件名-Data Id
+          group: DEFAULT_GROUP        # 默认为DEFAULT_GROUP
+          refresh: true               # 是否动态刷新，默认为false
+        shared-configs[3]:
+          data-id: rabbitmq.properties  # 配置文件名-Data Id
+          group: DEFAULT_GROUP        # 默认为DEFAULT_GROUP
+          refresh: true               # 是否动态刷新，默认为false
+      discovery:
+        namespace: ${config.namespace}
+        server-addr: ${discovery.server-addr}
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        - id: fx-es-server
+          uri: lb://fx-es-server
+          predicates:
+            - Path=/es/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+        - id: fx-uaa-server
+          uri: lb://fx-uaa-server
+          predicates:
+            - Path=/uaa/**
+          filters:
+            - StripPrefix=1
+            - PreserveHostHeader
+  main:
+    allow-bean-definition-overriding: true
+
+
+knife4j:
+  cors: true
+  enable: true
+  basic:
+    username: dms
+    password: 123456
+    enable: false
+  production: false
