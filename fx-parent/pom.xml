@@ -24,6 +24,7 @@
         <spring-cloud-alibaba.version>2.2.2.RELEASE</spring-cloud-alibaba.version>
         <hutool.version>4.1.19</hutool.version>
         <knife4j.version>3.0.3</knife4j.version>
+        <mybatis-plus.version>3.1.1</mybatis-plus.version>
     </properties>
 
     <!-- 环境 -->

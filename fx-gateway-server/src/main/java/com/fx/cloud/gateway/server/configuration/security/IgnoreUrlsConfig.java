@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 public class IgnoreUrlsConfig {
     private List<String> urls = Lists.newArrayList(
+            "/**/login/**",
             "/**/v2/api-docs",
             "/doc.html/**",
             "/error",
