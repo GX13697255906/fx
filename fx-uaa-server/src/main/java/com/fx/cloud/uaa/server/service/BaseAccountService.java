@@ -18,6 +18,6 @@ public interface BaseAccountService extends IBaseService<BaseAccount> {
      * @param password
      * @return
      */
-    BaseAccount getByUserNameAndPassword(String account, String password);
+    BaseAccount getByUserNameAndPassword(String account);
 
 }

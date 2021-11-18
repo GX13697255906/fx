@@ -21,16 +21,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class BaseAccountServiceImpl extends BaseServiceImpl<BaseAccountMapper, BaseAccount> implements BaseAccountService {
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public BaseAccount getByUserNameAndPassword(String account, String password) {
-        password = passwordEncoder.encode(password);
+    public BaseAccount getByUserNameAndPassword(String account) {
         QueryWrapper<BaseAccount> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
-                .eq(BaseAccount::getAccount, account)
-                .eq(BaseAccount::getPassword, password);
+                .eq(BaseAccount::getAccount, account);
         return getOne(queryWrapper, false);
     }
 }

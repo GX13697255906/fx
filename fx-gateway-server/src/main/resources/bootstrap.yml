@@ -46,6 +46,10 @@ spring:
           filters:
             - StripPrefix=1
             - PreserveHostHeader
+    sentinel:
+      transport:
+        dashboard: 172.16.0.118:7777
+
   main:
     allow-bean-definition-overriding: true
 
