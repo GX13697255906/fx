@@ -1,4 +1,4 @@
-package com.fx.cloud.common.security;
+package com.fx.cloud.uaa.server.entity;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

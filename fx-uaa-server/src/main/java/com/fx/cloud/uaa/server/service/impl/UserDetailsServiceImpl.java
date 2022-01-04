@@ -1,17 +1,14 @@
 package com.fx.cloud.uaa.server.service.impl;
 
 import com.fx.cloud.common.entity.base.BaseAccount;
-import com.fx.cloud.common.security.FxAuthority;
+import com.fx.cloud.uaa.server.entity.FxAuthority;
 import com.fx.cloud.uaa.server.entity.FxUserDetails;
 import com.fx.cloud.uaa.server.service.BaseAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
