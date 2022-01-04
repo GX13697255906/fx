@@ -33,6 +33,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
+        <!-- 消息总线rabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
         <!--熔断-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
