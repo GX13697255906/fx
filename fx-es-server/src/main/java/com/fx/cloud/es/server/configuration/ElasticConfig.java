@@ -8,12 +8,14 @@ import org.elasticsearch.client.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.IOException;
+
 /**
  * @author xun.guo
  */
 @Slf4j
 @Configuration
-public class ElasticClient {
+public class ElasticConfig {
 
     private static final String HTTP_SCHEMA = "http";
 
@@ -35,7 +37,7 @@ public class ElasticClient {
             new HttpHost(IP_88, ELASTIC_PORT, HTTP_SCHEMA)
     };
 
-    public ElasticClient() {
+    public ElasticConfig() {
         log.info("Elasticsearch init in service");
         Header[] headers = new Header[]{new BasicHeader("header", "value")};
         clientBuilder = RestClient.builder(hosts)
@@ -49,6 +51,15 @@ public class ElasticClient {
                 .setNodeSelector(NodeSelector.SKIP_DEDICATED_MASTERS);
         restHighLevelClient = new RestHighLevelClient(clientBuilder);
 
+    }
+
+    public void closeClient() {
+        try {
+            log.info("关闭客户端");
+            restHighLevelClient.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Bean

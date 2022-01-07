@@ -90,7 +90,7 @@ public class PersonServiceImpl implements PersonService {
                 log.error(e.getMessage());
             }
         };
-//        restHighLevelClient.indices().analyzeAsync(analyzeRequest, RequestOptions.DEFAULT, listener);
+        restHighLevelClient.indices().analyzeAsync(analyzeRequest, RequestOptions.DEFAULT, listener);
         return restHighLevelClient.indices().analyze(analyzeRequest, RequestOptions.DEFAULT);
 
     }
