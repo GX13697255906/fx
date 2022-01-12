@@ -23,6 +23,7 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.2.RELEASE</spring-cloud-alibaba.version>
         <hutool.version>4.1.19</hutool.version>
+        <apache.commons.beanutils>1.9.3</apache.commons.beanutils>
         <knife4j.version>3.0.3</knife4j.version>
         <mybatis-plus.version>3.5.0</mybatis-plus.version>
     </properties>

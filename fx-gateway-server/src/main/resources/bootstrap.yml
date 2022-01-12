@@ -27,25 +27,25 @@ spring:
       discovery:
         namespace: ${config.namespace}
         server-addr: ${discovery.server-addr}
-    gateway:
-      discovery:
-        locator:
-          lower-case-service-id: true
-      routes:
-        - id: fx-es-server
-          uri: lb://fx-es-server
-          predicates:
-            - Path=/es/**
-          filters:
-            - StripPrefix=1
-            - PreserveHostHeader
-        - id: fx-uaa-server
-          uri: lb://fx-uaa-server
-          predicates:
-            - Path=/uaa/**
-          filters:
-            - StripPrefix=1
-            - PreserveHostHeader
+#    gateway:
+#      discovery:
+#        locator:
+#          lower-case-service-id: true
+#      routes:
+#        - id: fx-es-server
+#          uri: lb://fx-es-server
+#          predicates:
+#            - Path=/es/**
+#          filters:
+#            - StripPrefix=1
+#            - PreserveHostHeader
+#        - id: fx-uaa-server
+#          uri: lb://fx-uaa-server
+#          predicates:
+#            - Path=/uaa/**
+#          filters:
+#            - StripPrefix=1
+#            - PreserveHostHeader
     sentinel:
       transport:
         dashboard: 172.16.0.118:7777

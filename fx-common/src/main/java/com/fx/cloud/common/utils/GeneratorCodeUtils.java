@@ -47,10 +47,10 @@ public class GeneratorCodeUtils {
                 .packageConfig(builder -> {
                     builder.parent("com.fx.cloud.gateway.server")
                             .serviceImpl("service.impl")
-                            .mapper( "mapper")
-                            .xml( "xml")
+                            .mapper("mapper")
+                            .xml("xml")
                             .entity("entity")
-                            .service ("service")
+                            .service("service")
                             .controller("controller")
                             .build();
                 })
@@ -64,11 +64,10 @@ public class GeneratorCodeUtils {
                             .enableHyphenStyle()
                             .enableRestStyle()
                             .mapperBuilder()
+                            .enableMapperAnnotation()
                             .enableBaseResultMap()
                             .enableBaseColumnList()
-                            .build()
-
-                    ;
+                            .build();
                 })
                 .templateEngine(new FreemarkerTemplateEngine())
                 .execute();
