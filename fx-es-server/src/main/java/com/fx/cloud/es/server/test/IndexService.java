@@ -1,4 +1,4 @@
-package com.fx.cloud.es.server.service;
+package com.fx.cloud.es.server.test;
 
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 

@@ -1,6 +1,6 @@
-package com.fx.cloud.es.server.controller;
+package com.fx.cloud.es.server.test.controller;
 
-import com.fx.cloud.es.server.service.UnitParamRegisterService;
+import com.fx.cloud.es.server.test.UnitParamRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

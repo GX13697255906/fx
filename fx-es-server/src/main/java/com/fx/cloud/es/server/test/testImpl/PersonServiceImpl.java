@@ -1,7 +1,7 @@
-package com.fx.cloud.es.server.service.impl;
+package com.fx.cloud.es.server.test.testImpl;
 
 import com.fx.cloud.es.server.constants.IndexConstants;
-import com.fx.cloud.es.server.service.PersonService;
+import com.fx.cloud.es.server.test.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest;

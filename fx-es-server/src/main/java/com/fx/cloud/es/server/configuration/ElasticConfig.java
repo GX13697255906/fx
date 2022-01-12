@@ -7,6 +7,8 @@ import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 import java.io.IOException;
 
@@ -62,9 +64,19 @@ public class ElasticConfig {
         }
     }
 
-    @Bean
-    public RestHighLevelClient getRestHighLevelClient() {
-        return restHighLevelClient;
+    public RestHighLevelClient elasticsearchClient() {
+        log.info("Elasticsearch init in service");
+        Header[] headers = new Header[]{new BasicHeader("header", "value")};
+        clientBuilder = RestClient.builder(hosts)
+                .setDefaultHeaders(headers)
+                .setFailureListener(new RestClient.FailureListener() {
+                    @Override
+                    public void onFailure(Node node) {
+                        log.error("节点地址：{} 不可用", node.getHost().getHostName());
+                    }
+                })
+                .setNodeSelector(NodeSelector.SKIP_DEDICATED_MASTERS);
+        return new RestHighLevelClient(clientBuilder);
     }
 
     public static void main(String[] args) {

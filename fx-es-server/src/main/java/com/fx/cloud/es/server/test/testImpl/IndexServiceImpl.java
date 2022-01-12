@@ -1,6 +1,6 @@
-package com.fx.cloud.es.server.service.impl;
+package com.fx.cloud.es.server.test.testImpl;
 
-import com.fx.cloud.es.server.service.IndexService;
+import com.fx.cloud.es.server.test.IndexService;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;

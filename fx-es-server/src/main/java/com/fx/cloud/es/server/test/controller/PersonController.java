@@ -1,6 +1,6 @@
-package com.fx.cloud.es.server.controller;
+package com.fx.cloud.es.server.test.controller;
 
-import com.fx.cloud.es.server.service.PersonService;
+import com.fx.cloud.es.server.test.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;

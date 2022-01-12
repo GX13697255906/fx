@@ -30,6 +30,9 @@ spring:
         server-addr: ${discovery.server-addr}
   main:
     allow-bean-definition-overriding: true
+  elasticsearch:
+    rest:
+      uris: http://172.16.0.87:9200, http://172.16.0.88:8200, http://172.16.0.74:9200
 
 fx:
   cloud:
