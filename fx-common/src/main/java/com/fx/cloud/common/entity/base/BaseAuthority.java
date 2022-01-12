@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @TableName("base_authority")
 public class BaseAuthority extends AbstractEntity {
 
-    @TableId(type = IdType.ID_WORKER)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long authorityId;
 
     /**

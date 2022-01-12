@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fx.cloud.gateway.server.mapper.GatewayAccessLogsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fx.cloud.gateway.server.entity.GatewayAccessLogs">
+        <id column="access_id" property="accessId" />
+        <result column="path" property="path" />
+        <result column="params" property="params" />
+        <result column="headers" property="headers" />
+        <result column="ip" property="ip" />
+        <result column="http_status" property="httpStatus" />
+        <result column="method" property="method" />
+        <result column="request_time" property="requestTime" />
+        <result column="response_time" property="responseTime" />
+        <result column="use_time" property="useTime" />
+        <result column="user_agent" property="userAgent" />
+        <result column="region" property="region" />
+        <result column="authentication" property="authentication" />
+        <result column="service_id" property="serviceId" />
+        <result column="error" property="error" />
+        <result column="nick_name" property="nickName" />
+        <result column="user_name" property="userName" />
+        <result column="operation_type" property="operationType" />
+        <result column="api_name" property="apiName" />
+        <result column="client_ip" property="clientIp" />
+        <result column="market_id" property="marketId" />
+        <result column="area_code" property="areaCode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        access_id, path, params, headers, ip, http_status, method, request_time, response_time, use_time, user_agent, region, authentication, service_id, error, nick_name, user_name, operation_type, api_name, client_ip, market_id, area_code
+    </sql>
+
+</mapper>

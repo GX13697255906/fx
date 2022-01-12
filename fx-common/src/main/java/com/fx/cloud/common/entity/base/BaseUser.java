@@ -23,7 +23,7 @@ public class BaseUser extends AbstractEntity {
     /**
      * 系统用户ID
      */
-    @TableId(type = IdType.ID_WORKER)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long userId;
 
     /**
@@ -39,7 +39,7 @@ public class BaseUser extends AbstractEntity {
     /**
      * 企业ID
      */
-    @TableField(value = "company_id", strategy = FieldStrategy.IGNORED)
+    @TableField(value = "company_id")
     private Long companyId;
 
     /**
@@ -82,7 +82,7 @@ public class BaseUser extends AbstractEntity {
     /**
      * 职位ID
      */
-    @TableField(value = "post_id", strategy = FieldStrategy.IGNORED)
+    @TableField(value = "post_id")
     private Long postId;
 
     /**

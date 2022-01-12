@@ -21,7 +21,7 @@ public class BaseAccount extends AbstractEntity {
 
     private static final long serialVersionUID = -9061271824337759269L;
 
-    @TableId(type = IdType.ID_WORKER)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long accountId;
 
     /**
