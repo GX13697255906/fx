@@ -38,8 +38,8 @@ fx:
   cloud:
     swagger:
       enabled: true
-      description: Elasticsearch实例
-      title: Elasticsearch实例
+      description: 搜索引擎模块
+      title: 搜索引擎模块
       version: ${server.version}
 
 

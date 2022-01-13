@@ -48,8 +48,19 @@ spring:
 #            - PreserveHostHeader
     sentinel:
       transport:
-        dashboard: 172.16.0.118:7777
-
+        dashboard: 172.16.0.74:8082
+      eager: true
+      datasource:
+        flow:
+          nacos:
+            server-addr: ${config.server-addr}
+            username: nacos
+            password: nacos
+            namespace: cc9efa28-58e8-4c83-a2df-b17eebf2e885
+            dataId: es-sentinel
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: flow
   main:
     allow-bean-definition-overriding: true
 

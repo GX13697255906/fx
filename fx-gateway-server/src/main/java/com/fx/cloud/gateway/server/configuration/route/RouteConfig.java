@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fx.cloud.gateway.server.entity.GatewayRoute;
 import com.fx.cloud.gateway.server.service.IGatewayRouteService;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.composite.CompositeDiscoveryClient;
@@ -19,9 +20,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Administrator
+ * @author xun.guo
  * 代码配置路由
  */
+
+@Slf4j
 @Configuration
 public class RouteConfig {
 
@@ -34,6 +37,7 @@ public class RouteConfig {
 
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder routeLocatorBuilder) {
+        log.info("-------------------代码加载路由-------------------");
         RouteLocatorBuilder.Builder builder = routeLocatorBuilder.routes();
         CompositeDiscoveryClient compositeDiscoveryClient = (CompositeDiscoveryClient) discoveryClient;
         List<DiscoveryClient> discoveryClientList = compositeDiscoveryClient.getDiscoveryClients();
@@ -64,8 +68,6 @@ public class RouteConfig {
                 }
             }
         }
-
-
         RouteLocator routeLocator = builder.build();
         return routeLocator;
     }

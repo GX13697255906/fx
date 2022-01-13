@@ -48,19 +48,15 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
 
     @Autowired
     private DiscoveryClient discoveryClient;
-
     private static NacosDiscoveryClient nacosDiscoveryClient = null;
-
     public static final String API_URI = "v2/api-docs";
-    private final RouteLocator routeLocator;
-    private final GatewayProperties gatewayProperties;
 
     @Autowired
     private IGatewayRouteService gatewayRouteService;
 
-
     @Override
     public List<SwaggerResource> get() {
+        log.info("-------------------刷新swagger列表-------------------");
         List<SwaggerResource> resources = new ArrayList<>();
         CompositeDiscoveryClient compositeDiscoveryClient = (CompositeDiscoveryClient) discoveryClient;
         List<DiscoveryClient> discoveryClientList = compositeDiscoveryClient.getDiscoveryClients();
@@ -85,7 +81,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
                     for (GatewayRoute gatewayRoute : routeList) {
                         List<ServiceInstance> serviceInstances = nacosDiscoveryClient.getInstances(gatewayRoute.getServiceId());
                         serviceInstances = serviceInstances.stream().filter(e -> MapUtils.getString(e.getMetadata(), Constants.NACOS_HEALTHY_KEY).equals("true")).collect(Collectors.toList());
-                        if(!CollectionUtils.isEmpty(serviceInstances)){
+                        if (!CollectionUtils.isEmpty(serviceInstances)) {
                             resources.add(swaggerResource(gatewayRoute.getServiceId(), gatewayRoute.getPath().replace("**", API_URI)));
                         }
                     }
