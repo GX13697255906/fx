@@ -25,7 +25,7 @@ public class IgnoreUrlsConfig {
             "/favicon.ico");
 
     public IgnoreUrlsConfig() {
-        urls.add("/**");
+//        urls.add("/**");
     }
 
 }

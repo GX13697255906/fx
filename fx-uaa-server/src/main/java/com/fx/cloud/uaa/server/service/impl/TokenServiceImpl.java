@@ -27,8 +27,6 @@ import java.util.*;
 public class TokenServiceImpl implements TokenService {
 
     @Autowired
-    private TokenStore tokenStore;
-    @Autowired
     private AuthorizationServerEndpointsConfiguration endpoints;
 
     private FxClientDetails clientDetails = new FxClientDetails();

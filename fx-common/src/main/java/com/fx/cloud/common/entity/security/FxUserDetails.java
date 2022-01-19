@@ -1,10 +1,10 @@
-package com.fx.cloud.uaa.server.entity;
+package com.fx.cloud.common.entity.security;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * 自定义用户详情实体
@@ -25,7 +25,7 @@ public class FxUserDetails implements UserDetails {
     /**
      * 用户权限信息
      */
-    private Set<GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
     /**
      * 账户没有过期
      */

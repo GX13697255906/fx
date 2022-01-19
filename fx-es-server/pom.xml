@@ -21,6 +21,12 @@
         <dependency>
             <groupId>com.fx.cloud</groupId>
             <artifactId>fx-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>spring-security-config</artifactId>
+                </exclusion>
+            </exclusions>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

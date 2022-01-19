@@ -5,5 +5,7 @@ package com.fx.cloud.gateway.server.constants;
  */
 public class RedisConstant {
 
-  public static final String RESOURCE_ROLES_MAP = "AUTH:RESOURCE_ROLES_MAP";
+    public static final String RESOURCE_ROLES_MAP = "AUTH:RESOURCE_ROLES_MAP";
+
+    public static final String AUTH_TOKEN = "Authorization";
 }

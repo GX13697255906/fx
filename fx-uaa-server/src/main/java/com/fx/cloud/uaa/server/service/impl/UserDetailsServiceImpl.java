@@ -1,11 +1,12 @@
 package com.fx.cloud.uaa.server.service.impl;
 
 import com.fx.cloud.common.entity.base.BaseAccount;
-import com.fx.cloud.uaa.server.entity.FxAuthority;
-import com.fx.cloud.uaa.server.entity.FxUserDetails;
+import com.fx.cloud.common.entity.security.FxAuthority;
+import com.fx.cloud.common.entity.security.FxUserDetails;
 import com.fx.cloud.uaa.server.service.BaseAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author xun.guo
@@ -27,6 +28,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private BaseAccountService baseAccountService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -42,9 +46,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (!ObjectUtils.isEmpty(baseAccount)) {
             userDetails.setPassword(baseAccount.getPassword());
         }
-        Set authoritiesSet = new HashSet();
+        Collection<FxAuthority> authoritiesSet = new HashSet();
         // 模拟从数据库中获取用户角色
         FxAuthority authority = new FxAuthority();
+        authority.setAuthorityId("1");
+        authority.setAuthority("/es/person/search");
         authoritiesSet.add(authority);
         userDetails.setAuthorities(authoritiesSet);
         return userDetails;

@@ -1,5 +1,6 @@
 package com.fx.cloud.uaa.server.configuration;
 
+import com.fx.cloud.common.constants.Constants;
 import com.fx.cloud.uaa.server.service.impl.ClientDetailsServiceImpl;
 import com.fx.cloud.uaa.server.service.impl.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public TokenStore tokenStore() {
         RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
 //        加fx_前缀
-        redisTokenStore.setPrefix("fx_");
+        redisTokenStore.setPrefix(Constants.AUTH_ACCESS_PREFIX);
         return redisTokenStore;
     }
 

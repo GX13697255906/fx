@@ -15,4 +15,9 @@ public class Constants {
      */
     public final static String NACOS_HEALTHY_KEY = "nacos.healthy";
 
+    /**
+     * redis存储token前缀
+     */
+    public final static String AUTH_ACCESS_PREFIX = "";
+
 }

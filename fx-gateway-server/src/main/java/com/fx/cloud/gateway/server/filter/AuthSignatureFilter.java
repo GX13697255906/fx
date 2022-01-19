@@ -1,6 +1,5 @@
 package com.fx.cloud.gateway.server.filter;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fx.cloud.gateway.server.configuration.security.IgnoreUrlsConfig;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,19 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 /**
  * @author xun.guo
@@ -56,26 +47,26 @@ public class AuthSignatureFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
-        String token = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        if (null == token || token.isEmpty()) {
-            ServerHttpResponse response = exchange.getResponse();
-            //当请求不携带Token或者token为空时，直接设置请求状态码为401，返回
-            InetSocketAddress remoteAddress = request.getRemoteAddress();
-            String clientIp = Objects.requireNonNull(remoteAddress).getAddress().getHostAddress();
-            log.info("非法请求，客户端IP：" + clientIp + "URL：" + request.getPath());
-            JSONObject message = new JSONObject();
-            message.put("code", HttpStatus.UNAUTHORIZED.value());
-            message.put("msg", "非法请求");
-            byte[] bits = message.toJSONString().getBytes(StandardCharsets.UTF_8);
-            DataBuffer buffer = response.bufferFactory().wrap(bits);
-            response.setStatusCode(HttpStatus.UNAUTHORIZED);
-            //指定编码，否则在浏览器中会中文乱码
-            response.getHeaders().add("Content-Type", "text/plain;charset=UTF-8");
-            return response.writeWith(Mono.just(buffer));
-
-        }
+//        String token = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+//        if (null == token || token.isEmpty()) {
+//            ServerHttpResponse response = exchange.getResponse();
+//            //当请求不携带Token或者token为空时，直接设置请求状态码为401，返回
+//            InetSocketAddress remoteAddress = request.getRemoteAddress();
+//            String clientIp = Objects.requireNonNull(remoteAddress).getAddress().getHostAddress();
+//            log.info("非法请求，客户端IP：" + clientIp + "URL：" + request.getPath());
+//            JSONObject message = new JSONObject();
+//            message.put("code", HttpStatus.UNAUTHORIZED.value());
+//            message.put("msg", "非法请求");
+//            byte[] bits = message.toJSONString().getBytes(StandardCharsets.UTF_8);
+//            DataBuffer buffer = response.bufferFactory().wrap(bits);
+//            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+//            //指定编码，否则在浏览器中会中文乱码
+//            response.getHeaders().add("Content-Type", "text/plain;charset=UTF-8");
+//            return response.writeWith(Mono.just(buffer));
+//
+//        }
         ServerHttpRequest authorization = request.mutate().headers(httpHeaders -> {
-            httpHeaders.add("Authorization", token);
+            httpHeaders.add("Authorization", "");
         }).build();
         ServerWebExchange serverWebExchange = exchange.mutate().request(authorization).build();
         return chain.filter(serverWebExchange);

@@ -13,13 +13,13 @@ import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.SecurityScheme;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +47,27 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
                 .build()
-                .securitySchemes(securitySchemes());
+                .securitySchemes(securitySchemes()).securityContexts(Lists.newArrayList(securityContext())).pathMapping("/");
+
+    }
+
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .operationSelector(e -> e.requestMappingPattern().matches("/.*"))
+                .build();
+    }
+
+    /**
+     * 默认的安全上引用
+     */
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        List<SecurityReference> securityReferences = new ArrayList<>();
+        securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
+        return securityReferences;
     }
 
     private ApiInfo groupApiInfo() {
@@ -56,6 +76,11 @@ public class SwaggerConfiguration {
                 .description(fxSwaggerProperties.getDescription())
                 .version(fxSwaggerProperties.getVersion())
                 .build();
+    }
+
+
+    private ApiKey apiKey() {
+        return new ApiKey("BearerToken", "Authorization", "header");
     }
 
     private List<SecurityScheme> securitySchemes() {
