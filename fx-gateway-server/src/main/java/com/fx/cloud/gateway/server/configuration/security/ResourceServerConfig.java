@@ -16,6 +16,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.server.WebFilter;
+
+import java.util.Iterator;
 
 /**
  * 资源服务器配置
@@ -34,7 +37,6 @@ public class ResourceServerConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(reactiveAuthenticationManager());
         authenticationWebFilter.setServerAuthenticationConverter(new FxAuthenticationConverter(tokenStore));
-        http.addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION);
 
         http.authorizeExchange()
                 // 白名单配置
@@ -48,8 +50,18 @@ public class ResourceServerConfig {
 //                配置entrypoint 禁止页面弹出登录框   AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常
                 .authenticationEntryPoint(new FxAuthenticationEntryPoint())
                 .and()
+                .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .csrf().disable();
         SecurityWebFilterChain chain = http.build();
+        Iterator<WebFilter> weIterable = chain.getWebFilters().toIterable().iterator();
+        while (weIterable.hasNext()) {
+            WebFilter f = weIterable.next();
+            if (f instanceof AuthenticationWebFilter) {
+                AuthenticationWebFilter webFilter = (AuthenticationWebFilter) f;
+                //将自定义的AuthenticationConverter添加到过滤器中
+                webFilter.setServerAuthenticationConverter(new FxAuthenticationConverter(tokenStore));
+            }
+        }
         return chain;
     }
 
@@ -65,10 +77,11 @@ public class ResourceServerConfig {
                     }
                 }
             } else {
-                authentication.setAuthenticated(false);
+                authentication.setAuthenticated(true);
                 return authentication;
             }
-            return null;
+            authentication.setAuthenticated(true);
+            return authentication;
         });
     }
 
