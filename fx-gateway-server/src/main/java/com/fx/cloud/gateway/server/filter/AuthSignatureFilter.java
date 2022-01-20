@@ -1,5 +1,6 @@
 package com.fx.cloud.gateway.server.filter;
 
+import com.fx.cloud.common.constants.AuthConstant;
 import com.fx.cloud.gateway.server.configuration.security.IgnoreUrlsConfig;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -66,7 +67,7 @@ public class AuthSignatureFilter implements GlobalFilter, Ordered {
 //
 //        }
         ServerHttpRequest authorization = request.mutate().headers(httpHeaders -> {
-            httpHeaders.add("Authorization", "");
+            httpHeaders.add(AuthConstant.AUTHORITY_KEY, "");
         }).build();
         ServerWebExchange serverWebExchange = exchange.mutate().request(authorization).build();
         return chain.filter(serverWebExchange);

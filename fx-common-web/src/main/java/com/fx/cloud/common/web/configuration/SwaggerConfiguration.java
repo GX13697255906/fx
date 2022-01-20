@@ -1,5 +1,6 @@
 package com.fx.cloud.common.web.configuration;
 
+import com.fx.cloud.common.constants.AuthConstant;
 import com.fx.cloud.common.model.FxSwaggerProperties;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.google.common.collect.Lists;
@@ -66,7 +67,7 @@ public class SwaggerConfiguration {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         List<SecurityReference> securityReferences = new ArrayList<>();
-        securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
+        securityReferences.add(new SecurityReference(AuthConstant.AUTHORITY_KEY, authorizationScopes));
         return securityReferences;
     }
 
@@ -80,12 +81,12 @@ public class SwaggerConfiguration {
 
 
     private ApiKey apiKey() {
-        return new ApiKey("BearerToken", "Authorization", "header");
+        return new ApiKey(AuthConstant.PARAM_KEY, AuthConstant.AUTHORITY_KEY, "header");
     }
 
     private List<SecurityScheme> securitySchemes() {
         return Lists.newArrayList(
-                new ApiKey("BearerToken", "Authorization", "header"));
+                new ApiKey(AuthConstant.PARAM_KEY, AuthConstant.AUTHORITY_KEY, "header"));
     }
 
 }

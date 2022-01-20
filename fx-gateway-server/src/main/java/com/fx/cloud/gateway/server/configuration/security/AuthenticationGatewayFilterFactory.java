@@ -1,6 +1,6 @@
 package com.fx.cloud.gateway.server.configuration.security;
 
-import com.fx.cloud.gateway.server.constants.AuthConstant;
+import com.fx.cloud.common.constants.AuthConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@ package com.fx.cloud.gateway.server.configuration.security;
 
 import com.fx.cloud.common.entity.security.FxAuthority;
 import com.fx.cloud.common.entity.security.FxUserDetails;
-import com.fx.cloud.gateway.server.constants.AuthConstant;
+import com.fx.cloud.common.constants.AuthConstant;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpRequest;
